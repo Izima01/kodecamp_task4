@@ -10,7 +10,7 @@ router.post('/register', async (req, res) => {
     const salt = bcrypt.genSaltSync(5);
 
     const hashedPassword = bcrypt.hashSync(password, salt);
-    const isUserExist = await userCollection.findOne({ userName });
+    const isUserExist = await userCollection.findOne({ userName: userName });
 
     if (isUserExist) return res.status(400).send("Username unavailable");
 
@@ -23,7 +23,7 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { userName, password } = req.body;
-    const userDetails = await userCollection.findOne({ userName });
+    const userDetails = await userCollection.findOne({ userName: userName });
     if (!userDetails) return res.status(404).send("User not found");
 
     const { userName: foundUserName, password: userPassword, _id: userId, role } = userDetails;
