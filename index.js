@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { connect } = require('mongoose');
+const mongoose = require('mongoose');
 const express = require('express');
 const port = process.env.port || 4000;
 const app = express();
@@ -7,7 +7,7 @@ const authRoute = require('./routes/auth');
 const shopItemsUser = require('./routes/shopItemsUser');
 const shopItemsAdmin = require('./routes/shopItemsAdmin');
 
-connect(process.env.mongodbUrl).then(() => console.log("Connected successfully"))
+mongoose.connect(process.env.mongodbUrl).then(() => console.log("Connected successfully"))
 .catch(err => console.log("Not connecting because", err));
 
 app.use(express.json());
