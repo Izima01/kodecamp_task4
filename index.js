@@ -6,9 +6,9 @@ const app = express();
 const authRoute = require('./routes/auth');
 const shopItemsUser = require('./routes/shopItemsUser');
 const shopItemsAdmin = require('./routes/shopItemsAdmin');
-console.log(process.env.mongodbURL, process.env.secret);
+const url = process.env.mongodbURL;
 
-mongoose.connect(process.env.mongodbUrl).then(() => console.log("Connected successfully"))
+mongoose.connect(url).then(() => console.log("Connected successfully"))
 .catch(err => console.log("Not connecting because", err));
 
 app.use(express.json());
