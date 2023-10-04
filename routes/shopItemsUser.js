@@ -14,7 +14,7 @@ router.get('/list-all', async (req, res) => {
     }
 });
 
-router.get('/find-by-id/?id=:id', async (req, res) => {
+router.get('/find-by-id/:id', async (req, res) => {
     try {
         const item = await itemsCollection.findById(req.params.id);
         if (!item) return res.status(404).send('Item not found');
@@ -25,7 +25,7 @@ router.get('/find-by-id/?id=:id', async (req, res) => {
     }
 });
 
-router.get('/find-by-name/?name=:name', async (req, res) => {
+router.get('/find-by-name/:name', async (req, res) => {
     try {
         const item = await itemsCollection.findOne({ name: req.params.name });
         if (!item) return res.status(404).send('Item not found');

@@ -25,7 +25,7 @@ router.post('/add-item', async (req, res) => {
     }
 });
 
-router.patch('/edit-item/?id=:id', async (req, res) => {
+router.patch('/edit-item/:id', async (req, res) => {
     try {
         const { name, description, price, isInStock } = req.body;
         
@@ -41,7 +41,7 @@ router.patch('/edit-item/?id=:id', async (req, res) => {
     }
 });
 
-router.delete('/delete-item/?id=:id', async (req, res) => {
+router.delete('/delete-item/:id', async (req, res) => {
     try {
         const deletedItem = await itemsCollection.findById(req.params.id);
         
