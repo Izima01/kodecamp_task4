@@ -26,11 +26,14 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         const { userName, password } = req.body;
-        const userDetails = await userCollection.findOne({ userName: userName });
+        const userDetails = await userCollection.findOne({ userName });
+
         if (!userDetails) return res.status(404).send("User not found");
+        
         const { userName: foundUserName, password: userPassword, _id: userId, role } = userDetails;
         const isPasswordmatch = bcrypt.compareSync(password, userPassword);
         if (!isPasswordmatch) return res.status(400).send("Password incorrect");
+        
         const token = jwt.sign({ userName: foundUserName, userId, role }, process.env.secret);
         res.status(200).json({ message: "Sign in successful", token });
     } catch (err) {

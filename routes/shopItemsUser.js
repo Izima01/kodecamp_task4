@@ -10,7 +10,7 @@ router.get('/list-all', async (req, res) => {
         const items = await itemsCollection.find();
         res.json({ message: "Items fetched successfuly", items });
     } catch (err) {
-        console.log(err);
+        res.send(err);
     }
 });
 
@@ -21,7 +21,7 @@ router.get('/find-by-id/:id', async (req, res) => {
         
         res.json(item);
     } catch (err) {
-        console.log(err);
+        res.send(err);
     }
 });
 
@@ -32,7 +32,7 @@ router.get('/find-by-name/:name', async (req, res) => {
     
         res.json(item);
     } catch (err) {
-        console.log(err);
+        res.send(err);
     }
 });
 
